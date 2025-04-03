@@ -24,9 +24,6 @@ export class OpenAIContextService {
             content: callState.initialMessage
         };
 
-        console.error('Initial message:', callState.initialMessage);
-        console.error('Call context:', callState.callContext);
-
         callState.conversationHistory.push(initialMessage);
     }
 

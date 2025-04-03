@@ -95,7 +95,6 @@ export class TwilioWsService {
      */
     public processStartEvent(data: any): void {
         this.callState.streamSid = data.start.streamSid;
-        console.error('Incoming stream has started', this.callState.streamSid);
         this.callState.responseStartTimestampTwilio = null;
         this.callState.latestMediaTimestamp = 0;
         this.callState.callSid = data.start.callSid;
@@ -117,7 +116,7 @@ export class TwilioWsService {
     public processMediaEvent(data: any): void {
         this.callState.latestMediaTimestamp = data.media.timestamp;
         if (SHOW_TIMING_MATH) {
-            console.error(`Received media message with timestamp: ${this.callState.latestMediaTimestamp}ms`);
+            // console.log(`Received media message with timestamp: ${this.callState.latestMediaTimestamp}ms`);
         }
     }
 }

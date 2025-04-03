@@ -40,7 +40,7 @@ export class OpenAIEventService {
             const response = JSON.parse(data.toString());
 
             if (LOG_EVENT_TYPES.includes(response.type)) {
-                console.error(`Received event: ${response.type}`, response);
+                // console.log(`Received event: ${response.type}`, response);
             }
 
             this.processEvent(response);
@@ -116,7 +116,7 @@ export class OpenAIEventService {
         if (!this.callState.responseStartTimestampTwilio) {
             this.callState.responseStartTimestampTwilio = this.callState.latestMediaTimestamp;
             if (SHOW_TIMING_MATH) {
-                console.error(`Setting start timestamp for new response: ${this.callState.responseStartTimestampTwilio}ms`);
+                // console.log(`Setting start timestamp for new response: ${this.callState.responseStartTimestampTwilio}ms`);
             }
         }
 

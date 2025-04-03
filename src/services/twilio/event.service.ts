@@ -11,7 +11,6 @@ export class TwilioEventService {
     private readonly twilioCallService: TwilioCallService;
     private readonly contextService: OpenAIContextService;
     private readonly onForwardAudioToOpenAI: (payload: string) => void;
-    private readonly onFirstMediaEvent: () => void;
 
     /**
      * Create a new Twilio event processor
@@ -19,20 +18,17 @@ export class TwilioEventService {
      * @param twilioCallService The Twilio call service
      * @param contextService The context service
      * @param onForwardAudioToOpenAI Callback for forwarding audio to OpenAI
-     * @param onFirstMediaEvent Callback for handling the first media event
      */
     constructor(
         callState: CallState,
         twilioCallService: TwilioCallService,
         contextService: OpenAIContextService,
         onForwardAudioToOpenAI: (payload: string) => void,
-        onFirstMediaEvent: () => void
     ) {
         this.callState = callState;
         this.twilioCallService = twilioCallService;
         this.contextService = contextService;
         this.onForwardAudioToOpenAI = onForwardAudioToOpenAI;
-        this.onFirstMediaEvent = onFirstMediaEvent;
     }
 
     /**
@@ -76,7 +72,7 @@ export class TwilioEventService {
     private async handleMediaEvent(data: any): Promise<void> {
         this.callState.latestMediaTimestamp = data.media.timestamp;
         if (SHOW_TIMING_MATH) {
-            console.error(`Received media message with timestamp: ${this.callState.latestMediaTimestamp}ms`);
+            // console.log(`Received media message with timestamp: ${this.callState.latestMediaTimestamp}ms`);
         }
 
         await this.handleFirstMediaEventIfNeeded();
@@ -91,9 +87,7 @@ export class TwilioEventService {
             return;
         }
 
-        console.error('First media event received');
         this.callState.hasSeenMedia = true;
-        this.onFirstMediaEvent();
 
         if (RECORD_CALLS && this.callState.callSid) {
             await this.startCallRecording();
@@ -113,7 +107,6 @@ export class TwilioEventService {
      */
     private async handleStartEvent(data: any): Promise<void> {
         this.callState.streamSid = data.start.streamSid;
-        console.error('Incoming stream has started', this.callState.streamSid);
         this.callState.responseStartTimestampTwilio = null;
         this.callState.latestMediaTimestamp = 0;
 

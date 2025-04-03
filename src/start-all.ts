@@ -58,7 +58,6 @@ async function setupNgrokTunnel(portNumber: number): Promise<string> {
         throw new Error('Failed to obtain ngrok URL');
     }
 
-    console.error(`Ingress established at: ${twilioCallbackUrl}`);
     return twilioCallbackUrl;
 }
 
@@ -67,11 +66,10 @@ async function setupNgrokTunnel(portNumber: number): Promise<string> {
  */
 function setupShutdownHandlers(): void {
     process.on('SIGINT', async () => {
-        console.error('DEBUG:', 'Shutting down services...');
         try {
             await ngrok.disconnect();
         } catch (err) {
-            console.warn('Error killing ngrok:', err);
+            console.error('Error killing ngrok:', err);
         }
         process.exit(0);
     });
@@ -88,11 +86,9 @@ function scheduleServerRetry(portNumber: number): void {
     const RETRY_INTERVAL_MS = 15000;
 
     const retryInterval = setInterval(async () => {
-        console.error(`Retrying to start server on port ${portNumber}...`);
         const stillInUse = await isPortInUse(portNumber);
 
         if (!stillInUse) {
-            console.error(`Port ${portNumber} is now available. Continuing startup...`);
             clearInterval(retryInterval);
             main();
         } else {
@@ -123,11 +119,9 @@ async function main(): Promise<void> {
         const twilioCallbackUrl = await setupNgrokTunnel(portNumber);
 
         // Start the main HTTP server
-        console.error('Starting HTTP server...');
         const server = new VoiceServer(twilioCallbackUrl, sessionManager);
         server.start();
 
-        console.error('Starting MCP server...');
         const mcpServer = new VoiceCallMcpServer(twilioCallService, twilioCallbackUrl);
         await mcpServer.start();
 

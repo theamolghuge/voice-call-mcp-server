@@ -50,7 +50,6 @@ export class SessionManagerService {
      */
     private addSession(ws: WebSocket, handler: OpenAICallHandler): void {
         this.activeSessions.set(this.getSessionKey(ws), handler);
-        console.error(`New session created. Active sessions: ${this.activeSessions.size}`);
     }
 
     /**
@@ -61,7 +60,6 @@ export class SessionManagerService {
         const sessionKey = this.getSessionKey(ws);
         if (this.activeSessions.has(sessionKey)) {
             this.activeSessions.delete(sessionKey);
-            console.error(`Session removed. Active sessions: ${this.activeSessions.size}`);
         }
     }
 

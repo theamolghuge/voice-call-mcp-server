@@ -21,13 +21,11 @@ export class OpenAIWsService {
      * Initialize the WebSocket connection to OpenAI
      * @param onMessage Callback for handling messages from OpenAI
      * @param onOpen Callback for when the connection is opened
-     * @param onClose Callback for when the connection is closed
      * @param onError Callback for handling errors
      */
     public initialize(
         onMessage: (data: WebSocket.Data) => void,
         onOpen: () => void,
-        onClose: () => void,
         onError: (error: Error) => void
     ): void {
         this.webSocket = new WebSocket(this.config.websocketUrl, {
@@ -39,7 +37,6 @@ export class OpenAIWsService {
 
         this.webSocket.on('open', onOpen);
         this.webSocket.on('message', onMessage);
-        this.webSocket.on('close', onClose);
         this.webSocket.on('error', onError);
     }
 

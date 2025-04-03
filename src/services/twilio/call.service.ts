@@ -28,7 +28,6 @@ export class TwilioCallService {
             await this.twilioClient.calls(callSid)
                 .recordings
                 .create();
-            console.error(`Recording started for call ${callSid}`);
         } catch (error) {
             console.error(`Failed to start recording for call ${callSid}:`, error);
         }
@@ -46,7 +45,6 @@ export class TwilioCallService {
         try {
             await this.twilioClient.calls(callSid)
                 .update({ status: 'completed' });
-            console.error(`Call ${callSid} ended`);
         } catch (error) {
             console.error(`Failed to end call ${callSid}:`, error);
         }
@@ -59,18 +57,13 @@ export class TwilioCallService {
 
             const callContextEncoded =  encodeURIComponent(callContext);
 
-            try {
-                const call = await twilioClient.calls.create({
-                    to: toNumber,
-                    from: process.env.TWILIO_NUMBER || '',
-                    url: `${twilioCallbackUrl}/call/outgoing?apiSecret=${DYNAMIC_API_SECRET}&callType=outgoing&callContext=${callContextEncoded}`,
-                });
-                console.error(`Call initiated with SID DYNAMIC SECRET: ${DYNAMIC_API_SECRET}`);
-                return call.sid;
-            } catch (error) {
-                console.error(`Error making call: ${error}`);
-                throw error;
-            }
+            const call = await twilioClient.calls.create({
+                to: toNumber,
+                from: process.env.TWILIO_NUMBER || '',
+                url: `${twilioCallbackUrl}/call/outgoing?apiSecret=${DYNAMIC_API_SECRET}&callType=outgoing&callContext=${callContextEncoded}`,
+            });
+
+            return call.sid;
         } catch (error) {
             console.error(`Error making call: ${error}`);
             throw error;

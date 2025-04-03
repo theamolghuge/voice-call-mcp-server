@@ -35,7 +35,6 @@ export class VoiceServer {
 
     private async handleOutgoingCall(req: express.Request, res: Response): Promise<void> {
         const apiSecret = req.query.apiSecret?.toString();
-        console.error('API SECRET:', apiSecret);
 
         if (req.query.apiSecret?.toString() !== DYNAMIC_API_SECRET) {
             res.status(401).json({ error: 'Unauthorized: Invalid or missing API secret' });
@@ -62,10 +61,7 @@ export class VoiceServer {
     }
 
     private handleOutgoingConnection(ws: WebSocket, req: express.Request): void {
-        console.error('DEBUG:', 'Received request:', req.params.secret);
-        console.error('DEBUG:', 'DYNAMIC API SECRET:', DYNAMIC_API_SECRET);
         if (req.params.secret !== DYNAMIC_API_SECRET) {
-            console.error('Unauthorized: Invalid or missing API secret');
             ws.close(1008, 'Unauthorized: Invalid or missing API secret');
             return;
         }
@@ -74,9 +70,6 @@ export class VoiceServer {
     }
 
     public start(): void {
-        this.app.listen(this.port, () => {
-            console.error(`Local: http://localhost:${this.port}`);
-            console.error(`Remote: ${this.callbackUrl}`);
-        });
+        this.app.listen(this.port);
     }
 }

@@ -78,11 +78,8 @@ To use this server with Claude Desktop, add the following to your configuration 
 {
   "mcpServers": {
     "voice-call": {
-      "command": "npm",
-      "args": [
-        "start"
-      ],
-      "cwd": "/path/to/your/voice-call-mcp-server",
+      "command": "node",
+      "args": ["/path/to/your/voice-call-mcp-server/dist/start-all.cjs"],
       "env": {
         "TWILIO_ACCOUNT_SID": "your_account_sid",
         "TWILIO_AUTH_TOKEN": "your_auth_token",

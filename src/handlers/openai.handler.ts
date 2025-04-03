@@ -52,8 +52,7 @@ export class OpenAICallHandler {
             this.callState,
             this.twilioCallService,
             contextService,
-            (payload) => this.openAIService.sendAudio(payload),
-            () => console.error('First media event detected') // Log the first media event
+            (payload) => this.openAIService.sendAudio(payload),// Log the first media event
         );
 
         this.setupEventHandlers();
@@ -79,10 +78,8 @@ export class OpenAICallHandler {
         this.openAIService.initialize(
             (data) => this.openAIEventProcessor.processMessage(data),
             () => {
-                console.error('Connected to the OpenAI Realtime API');
                 setTimeout(() => this.openAIService.initializeSession(this.callState.callContext), 100);
             },
-            () => console.error('Disconnected from the OpenAI Realtime API'),
             (error) => console.error('Error in the OpenAI WebSocket:', error)
         );
     }
@@ -110,7 +107,6 @@ export class OpenAICallHandler {
             async (message) => await this.twilioEventProcessor.processMessage(message),
             async () => {
                 this.openAIService.close();
-                console.error('Client disconnected');
             }
         );
     }
