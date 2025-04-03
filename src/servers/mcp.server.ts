@@ -68,22 +68,17 @@ export class VoiceCallMcpServer {
             'get-latest-call',
             new ResourceTemplate('call://transcriptions', { list: undefined }),
             async () => {
-                // TODO: get call transcriptions
-                try {
-                    return {
-                        contents: [{
-                            text: JSON.stringify({
-                                transcription: 'aa',
-                                status: 'completed',
-                            }),
-                            uri: 'call://transcriptions/latest',
-                            mimeType: 'application/json'
-                        }]
-                    };
-                } catch (error) {
-                    console.error(`Error getting latest call: ${error}`);
-                    throw error;
-                }
+                // TODO: get call transcription
+                return {
+                    contents: [{
+                        text: JSON.stringify({
+                            transcription: '{}',
+                            status: 'completed',
+                        }),
+                        uri: 'call://transcriptions/latest',
+                        mimeType: 'application/json'
+                    }]
+                };
             }
         );
     }
