@@ -34,7 +34,7 @@ export class OpenAICallHandler {
         // Initialize OpenAI service
         const openAIConfig: OpenAIConfig = {
             apiKey: process.env.OPENAI_API_KEY || '',
-            websocketUrl: process.env.OPENAI_WEBSOCKET_URL || '',
+            websocketUrl: process.env.OPENAI_WEBSOCKET_URL || 'wss://api.openai.com/v1/realtime?model=gpt-4o-mini-realtime-preview',
             voice: VOICE,
             temperature: 0.6
         };

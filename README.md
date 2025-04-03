@@ -61,6 +61,7 @@ The server requires several environment variables:
 
 - `TWILIO_ACCOUNT_SID`: Your Twilio account SID
 - `TWILIO_AUTH_TOKEN`: Your Twilio auth token
+- `TWILIO_NUMBER`: Your Twilio number
 - `OPENAI_API_KEY`: Your OpenAI API key
 - `NGROK_AUTHTOKEN`: Your ngrok authtoken
 - `RECORD_CALLS`: Set to "true" to record calls (optional)
@@ -85,6 +86,7 @@ To use this server with Claude Desktop, add the following to your configuration 
       "env": {
         "TWILIO_ACCOUNT_SID": "your_account_sid",
         "TWILIO_AUTH_TOKEN": "your_auth_token",
+        "TWILIO_NUMBER": "your_e.164_format_number",
         "OPENAI_API_KEY": "your_openai_api_key",
         "NGROK_AUTHTOKEN": "your_ngrok_authtoken"
       }
@@ -112,7 +114,7 @@ Please call Delicious Restaurant at +11234567890 and make a reservation for 4 pe
 
 3. Appointment scheduling:
 ```
-Call my dentist at +11234567890 and schedule a cleaning appointment for sometime next week.
+Call my dentist at +11234567890 and schedule a cleaning appointment for sometime next week Mon-Thu anytime between 4PM and 6PM.
 ```
 
 ## Important Notes
@@ -139,6 +141,9 @@ Common error messages and solutions:
 4. "Ngrok tunnel failed to start"
    - Ensure your NGROK_AUTHTOKEN is valid and not expired
 
+5. "OpenAI Realtime does not detect the end of voice input, or is lagging."
+   - Sometimes, there might be voice encoding issues between Twilio and the receiver's network operator. Try using a different receiver.
+
 ## Contributing
 
 Contributions are welcome! Here are some areas we're looking to improve:
@@ -163,6 +168,6 @@ Please do not include any sensitive information (like phone numbers or API crede
 
 ## Looking for a New Opportunity?
 
-🍿 Apply at Popcorn.space! We're hiring talented developers to join our remote team, innovate in the AI voice and telecommunications space, and hustle alongside us.
+🍿 We're hiring talented developers to join our team, innovate in the AI voice and telecommunications space, and hustle alongside us.
 
-Visit [careers.popcorn.space](https://careers.popcorn.space) to see our open positions and submit your application.
+Visit [careers.popcorn.space](https://careers.popcorn.space) to see our open positions!
