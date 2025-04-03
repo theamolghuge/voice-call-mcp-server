@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
 import ngrok from '@ngrok/ngrok';
-import { startApp } from './servers/voice.server.js';
-import { startMcpServer } from './servers/mcp.server.js';
 import { isPortInUse } from './utils/execution-utils.js';
+import { VoiceCallMcpServer } from './servers/mcp.server.js';
+import { TwilioCallService } from './services/twilio/call.service.js';
+import { VoiceServer } from './servers/voice.server.js';
+import twilio from 'twilio';
+import { CallSessionManager } from './handlers/openai.handler.js';
 
 // Load environment variables
 dotenv.config();
@@ -98,9 +101,7 @@ function scheduleServerRetry(portNumber: number): void {
     }, RETRY_INTERVAL_MS);
 }
 
-/**
- * Starts all services and sets up the server
- */
+
 async function main(): Promise<void> {
     try {
         validateEnvironmentVariables();
@@ -113,15 +114,22 @@ async function main(): Promise<void> {
             return;
         }
 
+        const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+        const sessionManager = new CallSessionManager(twilioClient);
+        const twilioCallService = new TwilioCallService(twilioClient);
+
         // Establish ngrok connectivity
         const twilioCallbackUrl = await setupNgrokTunnel(portNumber);
 
         // Start the main HTTP server
         console.error('Starting HTTP server...');
-        startApp(twilioCallbackUrl);
+        const server = new VoiceServer(twilioCallbackUrl, sessionManager);
+        server.start();
 
         console.error('Starting MCP server...');
-        startMcpServer(twilioCallbackUrl);
+        const mcpServer = new VoiceCallMcpServer(twilioCallService, twilioCallbackUrl);
+        await mcpServer.start();
 
         // Set up graceful shutdown
         setupShutdownHandlers();
