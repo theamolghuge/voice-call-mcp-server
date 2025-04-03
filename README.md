@@ -8,6 +8,7 @@ A Model Context Protocol (MCP) server that enables Claude and other AI assistant
 sequenceDiagram
     participant AI as AI Assistant (e.g., Claude)
     participant MCP as MCP Server
+    participant Voice as Voice Server
     participant Twilio as Twilio
     participant Phone as Destination Phone
     participant OpenAI as OpenAI
@@ -15,10 +16,10 @@ sequenceDiagram
     AI->>MCP: 1) Initiate outbound call request <br>(POST /calls)
     MCP->>Twilio: 2) Place outbound call via Twilio API
     Twilio->>Phone: 3) Ring the destination phone
-    Twilio->>MCP: 4) Call status updates & audio callbacks (webhooks)
-    MCP->>OpenAI: 5) Forward real-time audio to OpenaAI's realtime model
-    OpenAI->>MCP: 6) Return voice stream
-    MCP->>Twilio: 7) Send voice stream
+    Twilio->>Voice: 4) Call status updates & audio callbacks (webhooks)
+    Voice->>OpenAI: 5) Forward real-time audio to OpenaAI's realtime model
+    OpenAI->>Voice: 6) Return voice stream
+    Voice->>Twilio: 7) Send voice stream
     Twilio->>Phone: 8) Forward voice stream
     Note over Phone: Two-way conversation continues <br>until the call ends
 ```
