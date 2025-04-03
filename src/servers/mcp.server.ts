@@ -108,10 +108,6 @@ export class VoiceCallMcpServer {
     }
 
     public async start(): Promise<void> {
-        // Make a test call
-        await this.twilioCallService.makeCall(this.twilioCallbackUrl, '+37065382118', 'Book a restaurant for 2 people on 2025-04-02 at 18:00');
-
-        // Create and connect the stdio transport
         const transport = new StdioServerTransport();
         await this.server.connect(transport);
     }

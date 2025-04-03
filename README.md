@@ -55,6 +55,22 @@ This open-source implementation provides transparency and customizability, allow
 - OpenAI API key
 - Ngrok Authtoken
 
+## Installation
+
+### Manual Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/lukaskai/mcp-new.git
+   cd mcp-new
+   ```
+
+2. Install dependencies and build
+   ```bash
+   npm install
+   npm run build
+   ```
+
 ## Configuration
 
 The server requires several environment variables:
@@ -79,7 +95,7 @@ To use this server with Claude Desktop, add the following to your configuration 
   "mcpServers": {
     "voice-call": {
       "command": "node",
-      "args": ["/path/to/your/voice-call-mcp-server/dist/start-all.cjs"],
+      "args": ["/path/to/your/mcp-new/dist/start-all.cjs"],
       "env": {
         "TWILIO_ACCOUNT_SID": "your_account_sid",
         "TWILIO_AUTH_TOKEN": "your_auth_token",

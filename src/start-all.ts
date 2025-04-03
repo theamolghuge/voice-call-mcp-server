@@ -103,17 +103,17 @@ async function main(): Promise<void> {
         validateEnvironmentVariables();
         const portNumber = setupPort();
 
+        const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+        const sessionManager = new CallSessionManager(twilioClient);
+        const twilioCallService = new TwilioCallService(twilioClient);
+
         // Check if port is already in use
         const portInUse = await isPortInUse(portNumber);
         if (portInUse) {
             scheduleServerRetry(portNumber);
             return;
         }
-
-        const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-
-        const sessionManager = new CallSessionManager(twilioClient);
-        const twilioCallService = new TwilioCallService(twilioClient);
 
         // Establish ngrok connectivity
         const twilioCallbackUrl = await setupNgrokTunnel(portNumber);
