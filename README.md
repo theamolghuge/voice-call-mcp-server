@@ -65,8 +65,8 @@ This open-source implementation provides transparency and customizability, allow
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/lukaskai/mcp-new.git
-   cd mcp-new
+   git clone https://github.com/lukaskai/voice-call-mcp-server.git
+   cd voice-call-mcp-server
    ```
 
 2. Install dependencies and build
