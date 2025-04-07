@@ -2,7 +2,12 @@
 
 A Model Context Protocol (MCP) server that enables Claude and other AI assistants to initiate and manage voice calls using Twilio and OpenAI.
 
-<!-- ![Demo](./assets/demo.gif) -->
+Use this as a base to kick-start your AI-powered voice calling explorations, save time and develop additional functionality on top of it.
+
+![Demo](./assets/demo.gif)
+
+
+## Sequence Diagram
 
 ```mermaid
 sequenceDiagram
@@ -161,12 +166,12 @@ Common error messages and solutions:
 
 Contributions are welcome! Here are some areas we're looking to improve:
 
-- Implementing support for multiple AI models beyond the current implementation
-- Adding database integration for storing conversation history locally
-- Improving latency and response times for better call experiences
-- Enhancing error handling and recovery mechanisms
-- Adding more pre-built conversation templates for common scenarios
-- Implementing better call monitoring and analytics
+- Implement support for multiple AI models beyond the current implementation
+- Add database integration to store conversation history locally and make it accessible for AI context
+- Improve latency and response times to enhance call experiences
+- Enhance error handling and recovery mechanisms
+- Add more pre-built conversation templates for common scenarios
+- Implement improved call monitoring and analytics
 
 If you'd like to contribute, please open an issue to discuss your ideas before submitting a pull request.
 
