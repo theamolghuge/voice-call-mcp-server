@@ -111,6 +111,7 @@ export class TwilioEventService {
         this.callState.latestMediaTimestamp = 0;
 
         this.contextService.initializeCallState(this.callState, data.start.customParameters.fromNumber, data.start.customParameters.toNumber);
+        this.contextService.setupConversationContext(this.callState, data.start.customParameters.callContext);
         this.callState.callSid = data.start.callSid;
     }
 
