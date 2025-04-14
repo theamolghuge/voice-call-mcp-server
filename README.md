@@ -1,6 +1,6 @@
 # Voice Call MCP Server
 
-A Model Context Protocol (MCP) server that enables Claude and other AI assistants to initiate and manage voice calls using Twilio and OpenAI.
+A Model Context Protocol (MCP) server that enables Claude and other AI assistants to initiate and manage voice calls using Twilio and OpenAI (GPT-4o Realtime model).
 
 Use this as a base to kick-start your AI-powered voice calling explorations, save time and develop additional functionality on top of it.
 
@@ -32,7 +32,8 @@ sequenceDiagram
 ## Features
 
 - Make outbound phone calls via Twilio 📞
-- Process call audio in real-time with OpenAI 🎙️
+- Process call audio in real-time with GPT-4o Realtime model 🎙️
+- Real-time language switching during calls 🌐
 - Pre-built prompts for common calling scenarios (like restaurant reservations) 🍽️
 - Automatic public URL tunneling with ngrok 🔄
 - Secure handling of credentials 🔒
@@ -121,17 +122,17 @@ Here are some natural ways to interact with the server through Claude:
 
 1. Simple call:
 ```
-Can you call +11234567890 and let them know I'll be 15 minutes late for our meeting?
+Can you call +1-123-456-7890 and let them know I'll be 15 minutes late for our meeting?
 ```
 
 2. Restaurant reservation:
 ```
-Please call Delicious Restaurant at +11234567890 and make a reservation for 4 people tonight at 7:30 PM.
+Please call Delicious Restaurant at +1-123-456-7890 and make a reservation for 4 people tonight at 7:30 PM. Please speak in German.
 ```
 
 3. Appointment scheduling:
 ```
-Call my dentist at +11234567890 and schedule a cleaning appointment for sometime next week Mon-Thu anytime between 4PM and 6PM.
+Please call Expert Dental NYC (+1-123-456-7899) and reschedule my Monday appointment to next Friday between 4–6pm.
 ```
 
 ## Important Notes
@@ -183,8 +184,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Please do not include any sensitive information (like phone numbers or API credentials) in GitHub issues or pull requests. This server handles sensitive communications; deploy it responsibly and ensure all credentials are kept secure.
 
 
-## Looking for a New Opportunity?
+## Time For a New Mission?
 
-🍿 We're hiring talented developers to join our team, innovate in the AI voice and telecommunications space, and hustle alongside us.
+We’re hiring engineers to build at the frontier of voice AI — and bake it into a next-gen telco.
 
-Visit [careers.popcorn.space](https://careers.popcorn.space) to see our open positions!
+Curious? Head to [careers.popcorn.space](https://careers.popcorn.space/) 🍿 !
