@@ -188,4 +188,4 @@ Please do not include any sensitive information (like phone numbers or API crede
 
 We’re hiring engineers to build at the frontier of voice AI — and bake it into a next-gen telco.
 
-Curious? Head to [careers.popcorn.space](https://careers.popcorn.space/) 🍿 !
+Curious? Head to [careers.popcorn.space](https://careers.popcorn.space/apply) 🍿 !
