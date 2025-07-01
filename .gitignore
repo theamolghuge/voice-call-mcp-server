@@ -1,6 +1,8 @@
 # Dependency directories
 node_modules/
 jspm_packages/
+venv/
+models/
 
 # Build outputs
 dist/
