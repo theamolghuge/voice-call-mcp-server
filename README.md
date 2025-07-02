@@ -103,7 +103,7 @@ Download a Vosk model:
 ```bash
 mkdir -p models
 cd models
-wget https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
+curl -LO https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
 unzip vosk-model-en-us-0.22.zip
 rm vosk-model-en-us-0.22.zip
 cd ..
@@ -255,7 +255,7 @@ If you chose Vosk+Coqui mode, you need to install Python dependencies and downlo
    ```bash
    mkdir -p models
    cd models
-   wget https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
+   curl -LO https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
    unzip vosk-model-en-us-0.22.zip
    rm vosk-model-en-us-0.22.zip
    cd ..
@@ -398,7 +398,7 @@ cp .env.example .env
 # 3. For Vosk+Coqui mode only
 ./install-python-deps.sh
 mkdir -p models && cd models
-wget https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
+curl -LO https://alphacephei.com/vosk/models/vosk-model-en-us-0.22.zip
 unzip vosk-model-en-us-0.22.zip && rm vosk-model-en-us-0.22.zip
 cd ..
 
